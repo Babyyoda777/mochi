@@ -24,7 +24,7 @@ jobs:
       with:
         xcode-version: latest-stable
     - name: Build ${{ matrix.platform }}
-      run: xcodebuild -project "./App/Mochi.xcodeproj" -scheme Mochi -configuration Release -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/Mochi.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      run: xcodebuild clean -project "./App/Mochi.xcodeproj" -scheme Mochi -configuration Release -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/Mochi.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO -verbose
     - name: Package ${{ matrix.platform }}
       run: ./Misc/scripts/package.sh "build/Mochi.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "Mochi.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}"
     - name: Upload ${{ matrix.platform }} Symbols
