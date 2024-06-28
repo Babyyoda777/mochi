@@ -35,7 +35,7 @@ jobs:
       run: |
         swift package resolve
 
-    - name: Build ${{ matrix.platform }}
+    - name: Build IPA
       run: |
         xcodebuild clean -project "./App/Mochi.xcodeproj" \
                          -scheme Mochi \
@@ -47,16 +47,13 @@ jobs:
                          CODE_SIGNING_ALLOWED=NO \
                          -skipMacroValidation \
                          -verbose
+        xcodebuild -exportArchive -archivePath "build/Mochi.${{ matrix.platform }}.xcarchive" \
+                                  -exportOptionsPlist exportOptions.plist \
+                                  -exportPath "build"
 
-    - name: Package ${{ matrix.platform }}
-      run: ./Misc/scripts/package.sh "build/Mochi.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "Mochi.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}"
-
-    - name: Upload ${{ matrix.platform }} Symbols
-      run: ./Misc/scripts/upload_symbols.sh ${{ secrets.APPCENTER_TOKEN }}
-
-    - name: Upload ${{ matrix.platform }} Artifacts
+    - name: Upload IPA Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Mochi.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}
-        path: build/*
+        name: Mochi.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.ipa
+        path: build/*.ipa
         if-no-files-found: error
