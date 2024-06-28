@@ -164,6 +164,9 @@
 				Base,
 			);
 			mainGroup = 13C18B8829CE6CC100C14F26;
+			packageReferences = (
+				BB94AE842C14B2DF004E1ADB /* XCRemoteSwiftPackageReference "pillarbox-apple" */,
+			);
 			productRefGroup = 13C18B9229CE6CC200C14F26 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -373,10 +376,10 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/mochi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = ..;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z994R8374W;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -415,10 +418,10 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/mochi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = ..;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z994R8374W;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -470,6 +473,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BB94AE842C14B2DF004E1ADB /* XCRemoteSwiftPackageReference "pillarbox-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/pillarbox-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		13F11CBF2B11617D006FFF63 /* App */ = {
