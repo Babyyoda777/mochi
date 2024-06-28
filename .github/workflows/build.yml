@@ -50,7 +50,8 @@ jobs:
         xcodebuild -exportArchive -archivePath "build/Mochi.${{ matrix.platform }}.xcarchive" \
                                   -exportOptionsPlist exportOptions.plist \
                                   -exportPath "build"
-
+    - name: Package ${{ matrix.platform }}
+      run: ./package.sh "build/Mochi.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "Mochi.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}"
     - name: Upload Unsigned IPA Artifact
       uses: actions/upload-artifact@v2
       with:
