@@ -1,4 +1,4 @@
-name: IPA Build
+name: Unsigned IPA Build
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
       run: |
         swift package resolve
 
-    - name: Build IPA
+    - name: Build Unsigned IPA
       run: |
         xcodebuild clean -project "./App/Mochi.xcodeproj" \
                          -scheme Mochi \
@@ -51,7 +51,7 @@ jobs:
                                   -exportOptionsPlist exportOptions.plist \
                                   -exportPath "build"
 
-    - name: Upload IPA Artifact
+    - name: Upload Unsigned IPA Artifact
       uses: actions/upload-artifact@v2
       with:
         name: Mochi.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.ipa
