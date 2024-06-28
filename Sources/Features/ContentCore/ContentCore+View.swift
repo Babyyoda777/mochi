@@ -22,7 +22,7 @@ extension ContentCore {
 
     @ObservedObject private var viewStore: ViewStoreOf<ContentCore>
     private let contentType: Playlist.PlaylistType
-
+      
     @MainActor
     public init(
       store: StoreOf<ContentCore>,
@@ -206,10 +206,56 @@ extension ContentCore {
                   ForEach(items.value ?? Self.placeholderItems, id: \.number) { item in
                     let isDownloaded = viewStore.downloadedEpisodes.contains(item.id.rawValue.replacingOccurrences(of: "/", with: "\\"))
                     VStack(alignment: .leading, spacing: 0) {
-                      FillAspectImage(url: item.thumbnail ?? viewStore.playlist.posterImage)
-                        .aspectRatio(16 / 9, contentMode: .fit)
-                        .cornerRadius(12)
-                      
+                        ZStack {
+                            FillAspectImage(url: item.thumbnail ?? viewStore.playlist.posterImage)
+                                .aspectRatio(16 / 9, contentMode: .fit)
+                                .cornerRadius(12)
+                            
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    if isDownloaded == true {
+                                        Image(systemName: "checkmark")
+                                            .font(.system(size: 20, weight: .black))
+                                            .foregroundColor(.white)
+                                            .padding(7)
+                                            .background(.green)
+                                            .clipShape(Circle())
+                                            .padding(.top, 7.5)
+                                            .padding(.trailing, 7.5)
+                                        
+                                    }
+                                    else if isDownloaded == false{
+                                        Button(action: {
+                                            store.send(.didTapDownloadPlaylist(item))
+                                            
+                                        }) {
+                                            Image(systemName: "arrow.down")
+                                                .font(.system(size: 20, weight: .black))
+                                                .foregroundColor(.black)
+                                                .padding(7)
+                                                .background(.white)
+                                                .clipShape(Circle())
+                                        }
+                                        .padding(.top, 7.5)
+                                        .padding(.trailing, 7.5)
+                                        
+                                    }
+                                }
+                                Spacer()
+                            }
+                        }
+                        .contextMenu {
+                          if isDownloaded {
+                            Button(role: .destructive) {
+                              store.send(.didTapRemoveDownloadedPlaylist(item))
+                            } label: {
+                              Label("Remove episode", systemImage: "trash")
+                            }
+                            .buttonStyle(.plain)
+                          }
+                        }
+
                       Spacer()
                         .frame(height: 8)
                         
@@ -241,22 +287,6 @@ extension ContentCore {
                       }
                     }
                     .id(item.id)
-                    .contextMenu {
-                      Button() {
-                        store.send(.didTapDownloadPlaylist(item))
-                      } label: {
-                        Label("Download episode", systemImage: "square.and.arrow.down")
-                      }
-                      .buttonStyle(.plain)
-                      if isDownloaded {
-                        Button(role: .destructive) {
-                          store.send(.didTapRemoveDownloadedPlaylist(item))
-                        } label: {
-                          Label("Remove episode", systemImage: "trash")
-                        }
-                        .buttonStyle(.plain)
-                      }
-                    }
                   }
                   .frame(maxHeight: .infinity, alignment: .top)
                 }
@@ -512,15 +542,3 @@ extension Playlist.PlaylistType {
 }
 
 // MARK: - ContentListingView_Previews
-
-#Preview {
-  ContentCore.View(
-    store: .init(
-      initialState: .init(
-        repoModuleId: Repo().id(.init("")),
-        playlist: .empty
-      ),
-      reducer: { EmptyReducer() }
-    )
-  )
-}

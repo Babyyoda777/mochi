@@ -62,11 +62,11 @@ extension OfflineManagerClient {
     public let image: URL
     public let playlistName: String
     public let title: String
-    public let epNumber: Int
+    public let epNumber: Double
     public let taskId: Int
     public var status: StatusType
     
-    public init(id: URL, percentComplete: Double, image: URL, playlistName: String, title: String, epNumber: Int, taskId: Int, status: StatusType) {
+    public init(id: URL, percentComplete: Double, image: URL, playlistName: String, title: String, epNumber: Double, taskId: Int, status: StatusType) {
       self.id = id
       self.percentComplete = percentComplete
       self.image = image

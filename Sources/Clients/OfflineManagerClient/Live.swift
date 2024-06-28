@@ -69,7 +69,7 @@ extension OfflineManagerClient: DependencyKey {
       .init { continuation in
         let cancellable = Task.detached {
           var values = downloadManager.downloadingItems.compactMap {
-            DownloadingItem(id: $0.metadata.link.url, percentComplete: $0.percentage, image: $0.playlist.posterImage ?? $0.playlist.bannerImage ?? URL(string: "")!, playlistName: $0.playlist.title ?? "", title: $0.episode.title ?? "Unknown Title", epNumber: 0, taskId: $0.taskId, status: $0.status)
+              DownloadingItem(id: $0.metadata.link.url, percentComplete: $0.percentage, image: $0.playlist.posterImage ?? $0.playlist.bannerImage ?? URL(string: "")!, playlistName: $0.playlist.title ?? "", title: $0.episode.title ?? "Unknown Title", epNumber: $0.episode.number, taskId: $0.taskId, status: $0.status)
           }
           continuation.yield(values)
           
@@ -134,7 +134,7 @@ private class OfflineDownloadManager: NSObject {
     let playlist = asset.playlist
     let avAsset = AVURLAsset(url: URL(string: "http://localhost:64390/download.m3u?url=\(asset.episodeMetadata.link.url.absoluteString.replacingOccurrences(of: "&", with: ">>"))\(!asset.episodeMetadata.subtitles.isEmpty ? "&subs=\(String(data: try JSONEncoder().encode(asset.episodeMetadata.subtitles), encoding: .utf8)!)" : "")")!, options: options)
     let preferredMediaSelection = try await avAsset.load(.preferredMediaSelection)
-    
+    print(asset.episodeMetadata.link.url.absoluteString)
     guard let downloadTask = downloadSession.aggregateAssetDownloadTask(with: avAsset,
                                                                   mediaSelections: [preferredMediaSelection],
                                                                   assetTitle: asset.playlist.title ?? "Unknown Title",

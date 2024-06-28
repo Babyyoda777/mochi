@@ -807,21 +807,3 @@ extension VideoPlayerFeature.View {
   }
 }
 
-#Preview {
-  VideoPlayerFeature.View(
-    store: .init(
-      initialState: .init(
-        repoModuleId: Repo().id(.init("")),
-        playlist: .empty,
-        loadables: .init(),
-        group: .init(""),
-        variant: .init(""),
-        page: .init(""),
-        episodeId: .init(""),
-        overlay: .tools
-      ),
-      reducer: { EmptyReducer() }
-    )
-  )
-  .previewInterfaceOrientation(.landscapeRight)
-}
