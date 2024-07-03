@@ -7,7 +7,7 @@ This application is currently a work-in-progress, so expect bugs and things brea
 ## Features
 - [X] Ad-Free, forever
 - [X] Source-based modular system (powered by JavaScriptCore)
-- [ ] Offline downloads and local data support
+- [X] Offline downloads and local data support
 - [ ] iCloud sync support
 - [ ] Tracker support
 - [ ] Integrated with Apple ecosystem
