@@ -19,7 +19,7 @@ This application is currently a work-in-progress, so expect bugs and things brea
 - [ ] tvOS (Coming Soon)
 
 ## Installation
-*TBA (using TestFlight)*
+*TBA (using IPA)*
 
 ## Module development
 *TBA*
