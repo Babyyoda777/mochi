@@ -24,8 +24,8 @@ jobs:
     - name: Build and Export IPA
       run: |
         xcodebuild clean -project App/Mochi.xcodeproj -scheme Mochi -configuration Release
-        xcodebuild archive -project App/Mochi.xcodeproj -scheme Mochi -configuration Release -archivePath $PWD/build/Mochi.xcarchive -skipMacroValidation
-        xcodebuild -exportArchive -archivePath $PWD/build/Mochi.xcarchive -exportOptionsPlist App/exportOptions.plist -exportPath $PWD/build
+        xcodebuild archive -project App/Mochi.xcodeproj -scheme Mochi -configuration Release -archivePath $PWD/build/Mochi.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO -allowProvisioningUpdates
+        xcodebuild -exportArchive -archivePath $PWD/build/Mochi.xcarchive -exportOptionsPlist App/exportOptions.plist -exportPath $PWD/build -allowProvisioningUpdates SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
     - name: Upload IPA as Artifact
       uses: actions/upload-artifact@v2
