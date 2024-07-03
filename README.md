@@ -22,7 +22,7 @@ This application is currently a work-in-progress, so expect bugs and things brea
 *TBA (using TestFlight)*
 
 ## Module development
-*TBA*
+https://mochisite.verce.app
 
 ## Contribution
 Any contribution is greatly appreciated. This application's structure is based on [swift-composable-architecture](https://github.com/pointfreeco/swift-composable-architecture).
