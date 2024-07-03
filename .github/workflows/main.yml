@@ -24,7 +24,7 @@ jobs:
     - name: Build and Export IPA
       run: |
         xcodebuild clean -project App/Mochi.xcodeproj -scheme Mochi -configuration Release
-        xcodebuild archive -project App/Mochi.xcodeproj -scheme Mochi -configuration Release -archivePath $PWD/build/Mochi.xcarchive
+        xcodebuild archive -project App/Mochi.xcodeproj -scheme Mochi -configuration Release -archivePath $PWD/build/Mochi.xcarchive -skipMacroValidation
         xcodebuild -exportArchive -archivePath $PWD/build/Mochi.xcarchive -exportOptionsPlist App/exportOptions.plist -exportPath $PWD/build
 
     - name: Upload IPA as Artifact
